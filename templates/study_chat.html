@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Study Chat | StudyMate AI{% endblock title %}
+
+{% block body %}
+
+<section class="bg-light min-vh-100 py-5">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <div class="text-center mb-4">
+                    <span class="badge bg-primary mb-2">
+                        RAG Notes Chatbot
+                    </span>
+
+                    <h2 class="fw-bold">
+                        Ask questions from your uploaded notes
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Select one PDF, ask a question, and StudyMate AI will answer from that note.
+                    </p>
+                </div>
+
+                {% if not notes %}
+                    <div class="alert alert-warning">
+                        You have not uploaded notes yet.
+                        <a href="{% url 'upload_notes' %}" class="alert-link">
+                            Upload notes first
+                        </a>.
+                    </div>
+                {% endif %}
+
+                <div class="card border-0 shadow rounded-4">
+
+                    <div class="card-header bg-white border-0 p-4 rounded-top-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="fw-bold mb-1">
+                                    📘 StudyMate AI
+                                </h5>
+                                <small class="text-muted">
+                                    Answers based on your selected PDF
+                                </small>
+                            </div>
+
+                            {% if selected_note %}
+                                <span class="badge bg-success">
+                                    {{ selected_note.title }}
+                                </span>
+                            {% else %}
+                                <span class="badge bg-secondary">
+                                    Select a note
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="card-body bg-light p-4" style="min-height: 420px;">
+
+                        <div class="d-flex mb-3">
+                            <div class="bg-white border rounded-4 p-3 shadow-sm" style="max-width: 85%;">
+                                <div class="fw-bold text-primary mb-1">
+                                    StudyMate AI
+                                </div>
+                                <p class="mb-0">
+                                    Hello {{ user.username }} 👋<br>
+                                    Select your uploaded PDF and ask a question from that note.
+                                </p>
+                            </div>
+                        </div>
+
+                        {% if question %}
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="bg-primary text-white rounded-4 p-3 shadow-sm" style="max-width: 85%;">
+                                    <div class="fw-bold mb-1">
+                                        You
+                                    </div>
+                                    <p class="mb-0">
+                                        {{ question }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if answer %}
+                            <div class="d-flex mb-3">
+                                <div class="bg-white border rounded-4 p-3 shadow-sm" style="max-width: 85%;">
+                                    <div class="fw-bold text-primary mb-1">
+                                        StudyMate AI
+                                    </div>
+
+                                    <div>
+                                        {{ answer|safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="card-footer bg-white border-0 p-4 rounded-bottom-4">
+
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    Select Uploaded Note
+                                </label>
+
+                                <select name="note_id" class="form-select form-select-lg" required>
+                                    <option value="">Choose one PDF note</option>
+
+                                    {% for note in notes %}
+                                        <option value="{{ note.id }}"
+                                            {% if selected_note and selected_note.id == note.id %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            {{ note.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    name="question" 
+                                    id="questionInput"
+                                    class="form-control form-control-lg" 
+                                    placeholder="Ask a question from selected note..."
+                                    required
+                                    autocomplete="off"
+                                >
+
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Ask
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="mt-3 d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setQuestion('Summarize this note in simple points')">
+                                Summarize Note
+                            </button>
+
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setQuestion('Explain the important topics from this note')">
+                                Important Topics
+                            </button>
+
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setQuestion('Create exam questions from this note')">
+                                Exam Questions
+                            </button>
+
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setQuestion('Explain this topic in simple English')">
+                                Simple Explanation
+                            </button>
+                        </div>
+
+                        <div class="alert alert-info mt-3 mb-0 small">
+                            Tip: For best results, ask one topic at a time. Example:
+                            <strong>Explain overfitting and underfitting</strong>.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    function setQuestion(text) {
+        const input = document.getElementById("questionInput");
+        input.value = text;
+        input.focus();
+    }
+</script>
+
+{% endblock body %}

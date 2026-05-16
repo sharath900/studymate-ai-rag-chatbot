@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Home | StudyMate AI{% endblock title %}
+
+{% block body %}
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <div class="row align-items-center min-vh-75">
+
+            <!-- Left Content -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <span class="badge bg-primary mb-3">
+                    Smart Notes Chatbot using RAG
+                </span>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    Study smarter with your own notes
+                </h1>
+
+                <p class="lead text-muted mb-4">
+                    Upload your PDF notes and ask questions from them. StudyMate AI helps you understand your study material faster using AI.
+                </p>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'upload_notes' %}" class="btn btn-primary btn-lg me-2">
+                        Upload Notes
+                    </a>
+
+                    <a href="{% url 'study_chat' %}" class="btn btn-outline-dark btn-lg">
+                        Start Study Chat
+                    </a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">
+                        Get Started
+                    </a>
+
+                    <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg">
+                        Login
+                    </a>
+                {% endif %}
+            </div>
+
+            <!-- Right Card -->
+            <div class="col-md-6">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            What can StudyMate AI do?
+                        </h4>
+
+                        <div class="mb-3">
+                            <h6 class="fw-bold">📄 Upload Notes</h6>
+                            <p class="text-muted mb-0">
+                                Upload your PDF study material safely.
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <h6 class="fw-bold">🔍 Search from Notes</h6>
+                            <p class="text-muted mb-0">
+                                The system finds the most relevant content from your notes.
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <h6 class="fw-bold">🤖 Ask Questions</h6>
+                            <p class="text-muted mb-0">
+                                Get simple answers based on your uploaded notes.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">How it works</h2>
+            <p class="text-muted">
+                Simple steps to learn from your own notes.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="card-body text-center p-4">
+                        <h3>1</h3>
+                        <h5 class="fw-bold">Upload PDF</h5>
+                        <p class="text-muted">
+                            Add your class notes, textbook PDFs, or study material.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="card-body text-center p-4">
+                        <h3>2</h3>
+                        <h5 class="fw-bold">AI reads notes</h5>
+                        <p class="text-muted">
+                            StudyMate AI extracts and understands the important content.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="card-body text-center p-4">
+                        <h3>3</h3>
+                        <h5 class="fw-bold">Ask questions</h5>
+                        <p class="text-muted">
+                            Ask doubts and get answers from your uploaded notes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock body %}

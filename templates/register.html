@@ -4,103 +4,155 @@
 
 {% block body %}
 
-<section class="min-vh-100 bg-light d-flex align-items-center py-5">
+<section class="min-vh-100 d-flex align-items-center"
+         style="background: linear-gradient(135deg, #0f172a, #1e293b);">
+
     <div class="container">
 
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
+        <div class="row justify-content-center align-items-center">
 
-                <div class="card border-0 shadow rounded-4">
+            <!-- LEFT BRAND PANEL -->
+            <div class="col-md-6 d-none d-md-block text-white pe-5">
+
+                <h1 class="fw-bold mb-3">
+                    📘 StudyMate AI
+                </h1>
+
+                <p class="lead text-light opacity-75">
+                    Turn your PDFs into a personal AI tutor.
+                    Upload notes, ask questions, and revise smarter using RAG-powered AI.
+                </p>
+
+                <div class="mt-4">
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold">📄 Upload Notes</h6>
+                        <small class="text-light opacity-75">
+                            Add PDFs and convert them into searchable knowledge.
+                        </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold">🤖 AI Chat</h6>
+                        <small class="text-light opacity-75">
+                            Ask questions and get answers from your own content.
+                        </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold">🎯 Smart Revision</h6>
+                        <small class="text-light opacity-75">
+                            Summaries, quizzes, and exam prep instantly.
+                        </small>
+                    </div>
+
+                </div>
+
+                <p class="mt-4 small text-light opacity-50">
+                    Join students already studying smarter 🚀
+                </p>
+
+            </div>
+
+            <!-- SIGNUP CARD -->
+            <div class="col-md-5 col-lg-4">
+
+                <div class="card border-0 shadow-lg rounded-4">
+
                     <div class="card-body p-4 p-md-5">
 
+                        <!-- HEADER -->
                         <div class="text-center mb-4">
-                            <div class="display-5 mb-2">📘</div>
+
+                            <div class="display-5 mb-2">✨</div>
+
                             <h3 class="fw-bold mb-1">Create Account</h3>
+
                             <p class="text-muted mb-0">
-                                Register to start using StudyMate AI
+                                Start your AI-powered learning journey
                             </p>
+
                         </div>
 
+                        <!-- FORM -->
                         <form method="POST">
                             {% csrf_token %}
 
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    Username
-                                </label>
-                                <input 
-                                    type="text" 
-                                    name="username" 
-                                    class="form-control form-control-lg" 
-                                    placeholder="Choose a username" 
-                                    required
-                                >
+                                <label class="form-label fw-semibold">Username</label>
+                                <input type="text"
+                                       name="username"
+                                       class="form-control form-control-lg"
+                                       style="border-radius:12px;"
+                                       placeholder="Choose a username"
+                                       required>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    Email
-                                </label>
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    class="form-control form-control-lg" 
-                                    placeholder="Enter your email" 
-                                    required
-                                >
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="email"
+                                       name="email"
+                                       class="form-control form-control-lg"
+                                       style="border-radius:12px;"
+                                       placeholder="Enter your email"
+                                       required>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">
-                                    Password
-                                </label>
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    class="form-control form-control-lg" 
-                                    placeholder="Create password" 
-                                    required
-                                >
+                                <label class="form-label fw-semibold">Password</label>
+                                <input type="password"
+                                       name="password"
+                                       class="form-control form-control-lg"
+                                       style="border-radius:12px;"
+                                       placeholder="Create password"
+                                       required>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label fw-semibold">
-                                    Confirm Password
-                                </label>
-                                <input 
-                                    type="password" 
-                                    name="confirm_password" 
-                                    class="form-control form-control-lg" 
-                                    placeholder="Confirm password" 
-                                    required
-                                >
+                                <label class="form-label fw-semibold">Confirm Password</label>
+                                <input type="password"
+                                       name="confirm_password"
+                                       class="form-control form-control-lg"
+                                       style="border-radius:12px;"
+                                       placeholder="Confirm password"
+                                       required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-lg w-100">
-                                Create Account
+                            <button type="submit"
+                                    class="btn btn-lg w-100 text-white"
+                                    style="background:#4f46e5; border-radius:12px;">
+                                🚀 Create Account
                             </button>
+
                         </form>
 
+                        <!-- LOGIN LINK -->
                         <div class="text-center mt-4">
+
                             <p class="text-muted mb-0">
                                 Already have an account?
                                 <a href="{% url 'login' %}" class="fw-semibold text-decoration-none">
-                                    Login
+                                    Sign in
                                 </a>
                             </p>
+
                         </div>
 
                     </div>
+
                 </div>
 
-                <p class="text-center text-muted small mt-3">
-                    Upload notes. Ask questions. Learn faster.
+                <!-- TAGLINE -->
+                <p class="text-center text-light opacity-75 small mt-3">
+                    Upload • Ask • Learn • Excel
                 </p>
 
             </div>
+
         </div>
 
     </div>
+
 </section>
 
 {% endblock body %}
